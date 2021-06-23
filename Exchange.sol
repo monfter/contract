@@ -66,15 +66,17 @@ contract Exchange is ReentrancyGuard, Ownable {
     using SafeERC20 for IERC20;
 
     // aToken:bToken = 1.5:1
-    uint8 radio = 150;
+    uint8 public constant radio = 150;
 
     IERC20 public aToken;
     IERC20 public bToken;
 
-    address dead = address(0x01);
+    address public constant dead = address(0x01);
 
     constructor(address _aToken, address _bToken
     ) {
+        require(_aToken != address(0), "Exchange:Invalid address");
+        require(_bToken != address(0), "Exchange:Invalid address");
         aToken = IERC20(_aToken);
         bToken = IERC20(_bToken);
     }
@@ -82,7 +84,7 @@ contract Exchange is ReentrancyGuard, Ownable {
     function exchange(uint256 _amount) public nonReentrant payable {
         require(_amount > 0, "Exchange: Invalid convertible amount");
         aToken.safeTransferFrom(_msgSender(), dead, _amount);
-        safeTokenTransfer(_msgSender(), _amount.div(radio).mul(100));
+        safeTokenTransfer(_msgSender(), _amount.mul(100).div(radio));
     }
 
     // Safe token transfer function
