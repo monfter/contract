@@ -51,8 +51,8 @@ contract MonfterToken is ERC20("MonfterToken", "MON"), Ownable {
     /**
     * @notice MonfterToken constructor
     */
-    constructor() {
-        uint256 totalSupply = 1000000000 * 1e18;
+    constructor() 
+        uint256 totalSupply = 15 * 1e8 * 1e18;
         _mint(0xD9d13237e9DA35D98eEB2187cD99b3FD205d3465, totalSupply);
     }
 
