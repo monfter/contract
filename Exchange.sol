@@ -65,8 +65,8 @@ contract Exchange is ReentrancyGuard, Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    // aToken:bToken = 1.5:1
-    uint8 public constant radio = 150;
+    // aToken:bToken = 1:1
+    uint8 public constant radio = 100;
 
     IERC20 public aToken;
     IERC20 public bToken;
